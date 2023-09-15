@@ -41,14 +41,14 @@ public class Main {
                     String accountHolder = scanner.nextLine();
                     System.out.print("Enter Initial Balance: ");
                     double balance = scanner.nextDouble();
-                    bankOperation.createAccount(accountNumber, accountHolder, balance);
+                    bankoperation.createAccount(accountNumber, accountHolder, balance);
                     System.out.println("Account created successfully!");
                     break;
 
                 case 2:
                     System.out.print("Enter Account Number: ");
                     accountNumber = scanner.nextLine();
-                    String accountInfo = bankOperation.readAccount(accountNumber);
+                    String accountInfo = bankoperation.readAccount(accountNumber);
                     System.out.println(accountInfo);
                     break;
 
@@ -57,14 +57,14 @@ public class Main {
                     accountNumber = scanner.nextLine();
                     System.out.print("Enter New Balance: ");
                     double newBalance = scanner.nextDouble();
-                    bankOperation.updateAccount(accountNumber, newBalance);
+                    bankoperation.updateAccount(accountNumber, newBalance);
                     System.out.println("Account balance updated successfully!");
                     break;
 
                 case 4:
                     System.out.print("Enter Account Number: ");
                     accountNumber = scanner.nextLine();
-                    bankOperation.deleteAccount(accountNumber);
+                    bankoperation.deleteAccount(accountNumber);
                     System.out.println("Account deleted successfully!");
                     break;
 
