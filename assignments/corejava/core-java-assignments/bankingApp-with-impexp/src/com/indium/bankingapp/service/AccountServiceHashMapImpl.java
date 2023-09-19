@@ -1,14 +1,11 @@
 package com.indium.bankingapp.service;
-
-import com.indium.bankingapp.model.Account;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
+
+import com.indium.bankingapp.model.Account;
 
 public class AccountServiceHashMapImpl implements AccountService{
     private static Map<Integer, Account> accounts = new HashMap<>();
@@ -124,117 +121,45 @@ public class AccountServiceHashMapImpl implements AccountService{
         }
     }
 
-//    old code for importing data without using any threads
-//    public void importData1(){
-//        int counter =0;
-//        try(BufferedReader reader = new BufferedReader(new FileReader("./input/input.txt"))){
-//            String line;
-//            while((line = reader.readLine())!= null){
-//                String[] parts = line.split(",");
-//                String accHolderName = parts[0];
-//                double balance = Double.parseDouble(parts[1]);
-//                String accType = parts[3];
-//                int accNumber = Integer.parseInt(parts[2]);
-//                Account newAccount = new Account(accHolderName,balance,accNumber,accType);
-//                accounts.put(accNumber,newAccount);
-//                counter++;
-//            }
-//            System.out.println("imported "+counter+" records");
-//        }catch(Exception e){
-//            System.out.println(e.getMessage());
-//        }
-//    }
-
     public void importData(){
-        Runnable obj1 = new Runnable() {
-            @Override
-            public void run() {
-                int counter =0;
-                try(BufferedReader reader = new BufferedReader(new FileReader("./input/input.txt"))){
-                    String line;
-                    while((line = reader.readLine())!= null){
-                        String[] parts = line.split(",");
-                        String accHolderName = parts[0];
-                        double balance = Double.parseDouble(parts[1]);
-                        String accType = parts[3];
-                        int accNumber = Integer.parseInt(parts[2]);
-                        Account newAccount = new Account(accHolderName,balance,accNumber,accType);
-                        accounts.put(accNumber,newAccount);
-                        counter++;
-                    }
-                    System.out.println("imported "+counter+" records");
-                }catch(Exception e){
-                    System.out.println(e.getMessage());
-                }
-
+        int counter =0;
+        try(BufferedReader reader = new BufferedReader(new FileReader("./input/input.txt"))){
+            String line;
+            while((line = reader.readLine())!= null){
+                String[] parts = line.split(",");
+                String accHolderName = parts[0];
+                double balance = Double.parseDouble(parts[1]);
+                String accType = parts[3];
+                int accNumber = Integer.parseInt(parts[2]);
+                Account newAccount = new Account(accHolderName,balance,accNumber,accType);
+                accounts.put(accNumber,newAccount);
+                counter++;
             }
-        };
-        Thread t1 = new Thread(obj1);
-        t1.setName("Import thread");
-        t1.start();
-        System.out.println("importing data using "+t1.getName());
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            System.out.println("imported "+counter+" records");
+        }catch(Exception e){
+            System.out.println(e.getMessage());
         }
     }
 
-//    old method for export data without using seperate thread
-//    public void exportData(){
-//        int counter = 0;
-//        try(PrintWriter out = new PrintWriter(new FileWriter("./output/output.txt"))){
-//            for(Account account : accounts.values() ){
-//                StringBuilder accountRecord = new StringBuilder();
-//                accountRecord.append(account.getAccHolderName())
-//                        .append(",")
-//                        .append(account.getBalance())
-//                        .append(",")
-//                        .append(account.getAccountNumber())
-//                        .append(",")
-//                        .append(account.getAccType())
-//                        .append("\n");
-//                out.write(accountRecord.toString());
-//                counter++;
-//            }
-//            System.out.println("exported "+counter+" account details");
-//        }catch(Exception e){
-//            System.out.println(e.getMessage());
-//        }
-//    }
-
     public void exportData(){
-        Runnable obj1 = new Runnable() {
-            @Override
-            public void run() {
-                int counter = 0;
-                try(PrintWriter out = new PrintWriter(new FileWriter("./output/output.txt"))){
-                    for(Account account : accounts.values() ){
-                        StringBuilder accountRecord = new StringBuilder();
-                        accountRecord.append(account.getAccHolderName())
-                                .append(",")
-                                .append(account.getBalance())
-                                .append(",")
-                                .append(account.getAccountNumber())
-                                .append(",")
-                                .append(account.getAccType())
-                                .append("\n");
-                        out.write(accountRecord.toString());
-                        counter++;
-                    }
-                    System.out.println("exported "+counter+" account details");
-                }catch(Exception e){
-                    System.out.println(e.getMessage());
-                }
+        int counter = 0;
+        try(PrintWriter out = new PrintWriter(new FileWriter("./output/output.txt"))){
+            for(Account account : accounts.values() ){
+                StringBuilder accountRecord = new StringBuilder();
+                accountRecord.append(account.getAccHolderName())
+                        .append(",")
+                        .append(account.getBalance())
+                        .append(",")
+                        .append(account.getAccountNumber())
+                        .append(",")
+                        .append(account.getAccType())
+                        .append("\n");
+                out.write(accountRecord.toString());
+                counter++;
             }
-        };
-        Thread t2 = new Thread(obj1);
-        t2.setName("Export thread");
-        t2.start();
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            System.out.println("exported "+counter+" account details");
+        }catch(Exception e){
+            System.out.println(e.getMessage());
         }
     }
 }

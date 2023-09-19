@@ -1,9 +1,7 @@
+import java.util.*;
 import com.indium.bankingapp.model.Account;
 import com.indium.bankingapp.service.AccountService;
 import com.indium.bankingapp.service.AccountServiceHashMapImpl;
-
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class BankingAppMain {
     static int noOfAccountsOpened = 1;

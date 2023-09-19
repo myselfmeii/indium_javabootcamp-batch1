@@ -1,0 +1,2 @@
+mei,200000.0,123,savings
+vicky,500000.0,111,current

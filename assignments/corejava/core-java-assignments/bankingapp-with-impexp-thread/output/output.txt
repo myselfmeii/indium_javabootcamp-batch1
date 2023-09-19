@@ -1,3 +1,0 @@
-meiyarasu,20000.0,112,savings
-vignesh,200000.0,123,savings
-shanmugam,200000.0,111,current
