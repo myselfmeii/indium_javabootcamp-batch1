@@ -1,0 +1,6 @@
+mei,500000.0,112,savings
+shan,300000.0,113,current
+balaji,70000.0,115,current
+vicky,200000.0,111,savings
+mirshat,50000.0,114,savings
+
